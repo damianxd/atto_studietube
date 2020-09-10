@@ -27,18 +27,7 @@ YUI.add('moodle-atto_studietube-button', function (Y, NAME) {
  * @module moodle-atto_studietube-button
  */
 
-var COMPONENTNAME = 'atto_studietube',
-    // @codingStandardsIgnoreStart
-    IMAGETEMPLATE = '' +
-        '<img src="{{url}}" alt="{{alt}}" ' +
-            '{{#if width}}width="{{width}}" {{/if}}' +
-            '{{#if height}}height="{{height}}" {{/if}}' +
-            '{{#if presentation}}role="presentation" {{/if}}' +
-            'style="{{alignment}}{{margin}}{{customstyle}}"' +
-            '{{#if classlist}}class="{{classlist}}" {{/if}}' +
-            '{{#if id}}id="{{id}}" {{/if}}' +
-            '/>';
-    // @codingStandardsIgnoreEnd
+var COMPONENTNAME = 'atto_studietube';
 
 Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
 
@@ -83,7 +72,8 @@ Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_att
             border: 'none',
             width: '100%'
         });
-        iframe.setAttribute('src', '//www.studietube.dk/app/bluebird/1?passtype=direct&idcaller='+this.editor._yuid);
+        
+        iframe.setAttribute('src', '//www.studietube.dk/app/bluebird/1?passtype=direct&notok=true&idcaller='+this.editor._yuid);
 
         dialogue.set('bodyContent', iframe)
                 .show();
@@ -92,30 +82,28 @@ Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_att
     },
     
     _handleMedia: function(event, obj) {
+        this.getDialogue({
+            focusAfterHide: null
+        }).hide();
+        
         if (event.origin !== "https://www.studietube.dk" && event.origin !== "http://www.studietube.dk")
         {
             return;
         }
-     
-        var self = obj;
-    
-        ret = eval(event.data);
+
+        var ret = JSON.parse(event.data);
         
-        if(typeof ret[3] === 'undefined' || ret[3] !== obj.editor._yuid)
+        if(typeof ret[3] === 'undefined' || !ret[3].includes(obj.editor._yuid))
         {
             return;
         }
         
-        src = '//www.studietube.dk/e/'+ret[0]+'/0?nopanel=tru';
+        var html = '<iframe src="//www.studietube.dk/e/'+ret[0]+'/0" ';
+        html += 'width="480" height="390" allowfullscreen webkitallowfullscreen ';
+        html += 'mozAllowFullScreen frameborder="0" allow="encrypted-media"></iframe>';
         
-        newhtml = Y.Node.create('<div style="width: 100%;height:0;position:relative;padding-bottom:56.25%;"><iframe src="'+src+'" style="width:100%;height:100%;position:absolute;top:0;left: 0; " frameborder="0" border="0" scrolling="no" allowfullscreen="1"></iframe></div>');
-
-        self.editor.appendChild(newhtml);
-        self.markUpdated();
-        
-        this.getDialogue({
-            focusAfterHide: null
-        }).hide();
+        this.get('host').insertContentAtFocusPoint(html);
+        this.markUpdated();
     }
 }, {
     ATTRS: {
