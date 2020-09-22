@@ -96,20 +96,27 @@ Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_att
             return;
         }
         
-        var html = '<iframe src="//www.studietube.dk/e/'+ret[0]+'/0" ';
-        html += 'width="480" height="390" allowfullscreen webkitallowfullscreen ';
-        html += 'mozAllowFullScreen frameborder="0" allow="encrypted-media"></iframe>';
+        var html = '';
+        if(this.get('full'))
+        {
+            html = '<div style="width:100%;height:0;position:relative;padding-bottom:56.25%;">';
+            html += '<iframe src="//www.studietube.dk/e/'+ret[0]+'/0" ';
+            html += 'style="width:100%;height:100%;position:absolute;top:0;left:0;" allowfullscreen webkitallowfullscreen ';
+            html += 'mozAllowFullScreen frameborder="0" allow="encrypted-media"></iframe></div>';
+        }
+        else
+        {
+            html = '<div><img class="studietube" id="'+ret[0]+'" ';
+            html += 'src="//www.studietube.dk/t/'+ret[0]+'"></div>';
+        }
         
         this.get('host').insertContentAtFocusPoint(html);
         this.markUpdated();
     }
 }, {
     ATTRS: {
-        disabled: {
-            value: true
-        },
-        area: {
-            value: {}
+        full: {
+            value: false
         }
     }
 });
