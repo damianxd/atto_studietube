@@ -86,7 +86,7 @@ Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_att
             focusAfterHide: null
         }).hide();
         
-        if (event.origin !== "https://www.studietube.dk" && event.origin !== "http://www.studietube.dk")
+        if (event.origin !== "https://www.studietube.dk" && event.origin !== "http://www.studietube.dk"  && event.origin !== "http://www.skoletube.dk"  && event.origin !== "https://www.skoletube.dk")
         {
             return;
         }
@@ -111,7 +111,7 @@ Y.namespace('M.atto_studietube').Button = Y.Base.create('button', Y.M.editor_att
             html = '<div><img class="studietube" id="'+ret[0]+'" ';
             html += 'src="//www.studietube.dk/t/'+ret[0]+'"></div>';
         }
-        
+
         this.get('host').insertContentAtFocusPoint(html);
         this.markUpdated();
     }
