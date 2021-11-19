@@ -23,5 +23,11 @@
  */
 
 $string['pluginname'] = 'Import media from Studietube';
-$string['uploading'] = 'Uploading, please wait...';
-$string['privacy:metadata']      = 'The Lærit plugin does not store any personal data.';
+$string['studietube'] = 'Studietube';
+$string['size'] = 'Size';
+$string['saveimage'] = 'Save';
+$string['fullsize'] = 'Fullsize';
+$string['stsize'] = 'Media properties';
+$string['width'] = 'Width';
+$string['height'] = 'Height';
+$string['privacy:metadata'] = 'The Lærit plugin does not store any personal data.';

@@ -5,3 +5,4 @@ Date          Version   Comment
 2019/03/15    1.0.0     First release
 2020/09/10    1.4.0     Bug fix
 2020/09/10    1.4.1     Responsive media
+2021/11/19    2.0.0     Media resize and improvements for students

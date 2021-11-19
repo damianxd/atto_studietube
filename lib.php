@@ -26,13 +26,25 @@ defined('MOODLE_INTERNAL') || die();
 
 function atto_studietube_params_for_js($elementid, $options, $fpoptions)
 {
-    global $USER;
+    global $USER, $PAGE;
     
     $full = false;
     
     if(is_siteadmin()) {
         $full = true;
     }
+    
+    $strings = array(
+        'size',
+        'saveimage',
+        'fullsize',
+        'stsize',
+        'studietube',
+        'width',
+        'height',
+    );
+
+    $PAGE->requires->strings_for_js($strings, 'atto_studietube');
     
     return array('full' => $full);
 }
