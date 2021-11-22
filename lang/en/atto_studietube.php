@@ -22,8 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Import media from Studietube';
-$string['studietube'] = 'Studietube';
+$string['pluginname'] = 'Import media from Studietube/Skoletube';
+$string['studietube'] = 'Studietube/Skoletube';
 $string['size'] = 'Size';
 $string['saveimage'] = 'Save';
 $string['fullsize'] = 'Fullsize';
